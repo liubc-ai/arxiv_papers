@@ -28,7 +28,5 @@ models are released at https://github.com/showlab/Show-o.
 
 ## 内容总结
 
-无法生成总结: API调用失败
 
-## 方法总览图
 
