@@ -36,28 +36,7 @@ models will be released in https://github.com/showlab/UniRL.
 
 ## 内容总结
 
-### 1) Research Background and Problem  
-Unified multimodal large language models (e.g., Show-o, Janus) handle both generation and understanding tasks but face challenges in pretraining (high computational cost, reliance on large-scale data) and post-training (need for external data, task-specific customization). Additionally, these models often exhibit imbalance between generation and understanding tasks, where performance on one task does not align with the other for the same input.  
+无法生成总结: PDF内容或图片提取失败
 
-
-### 2) Core Method  
-UniRL is a self-improving post-training approach that requires no external image data. It enables mutual enhancement between generation and understanding: generated images supervise understanding, and understanding results guide generation. Key components include:  
-- **Self-generated training data**: The model generates images from constructed prompts (inspired by GenEval categories: single object, counting, color, etc.) during training, using these images as input for understanding tasks.  
-- **Optimization strategies**: Supervised Fine-Tuning (SFT) with ground-truth answer loss, and Group Relative Policy Optimization (GRPO) with relative rewards based on answer alignment (object/attribute correctness).  
-- **Task imbalance metric**: A bidirectional metric (AccuracyMMU|T2I and AccuracyT2I|MMU) to quantify consistency between generation (T2I) and understanding (MMU).  
-
-
-### 3) Main Experimental Results  
-Evaluated on Show-o (end-to-end) and Janus (non-end-to-end) base models:  
-- **Generation performance**: UniRL(SFT) achieved GenEval scores of 0.77 (Show-o) and 0.65 (Janus); improved DSG-1K (0.82 vs. 0.77 baseline) and CLIP-Score (0.337 vs. 0.331 baseline) for Show-o.  
-- **Understanding performance**: UniRL(GRPO) outperformed baselines with overall MMU accuracy 0.79 (Show-o) and 0.88 (Janus), with strong generalization across categories (e.g., position, attribute).  
-- **Task imbalance reduction**: GRPO reduced imbalance: e.g., Show-o’s AccuracyMMU|T2I improved from 0.83 to 0.93, and AccuracyT2I|MMU from 0.70 to 0.81. SFT showed overfitting in MMU (single-object category accuracy 0.08) but better T2I in end-to-end setups; GRPO was robust across architectures (end-to-end/non-end-to-end).  
-
-
-### 4) Conclusion and Contribution  
-UniRL advances post-training for unified multimodal models by:  
-- Proposing the first self-improving framework via SFT/GRPO without external data.  
-- Demonstrating GRPO’s superiority over SFT in robustness and imbalance reduction, while SFT excels in end-to-end T2I.  
-- Introducing a task imbalance metric, revealing common imbalance in existing models and showing UniRL’s effectiveness in mitigating it.  
-- Substantially improving generation/understanding quality and consistency (e.g., GenEval 0.77 for Show-o, 0.65 for Janus).
+## 方法总览图
 
