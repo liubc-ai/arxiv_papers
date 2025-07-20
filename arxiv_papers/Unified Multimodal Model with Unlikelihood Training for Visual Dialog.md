@@ -37,34 +37,5 @@ ensemble settings (75.92 and 76.17 NDCG scores).
 
 ## 内容总结
 
-### 1) Research Background and Problem  
-Visual dialog requires a multimodal chatbot to answer sequential questions about image content, considering dialog history and image context. Prior work primarily uses likelihood training on positive instances (correct answers), which often leads to frequent/dull outputs and fails to exploit negative instances (incorrect answers) in generative settings. Incorrect answers include wrong, frequent/dull, or acceptable (relevant but non-optimal) answers, which contain useful knowledge to improve generation quality.  
 
-
-### 2) Core Method  
-The proposed model, UniMM-UL (Unified Multimodal Model with Unlikelihood Training), extends ViLBERT (a two-stream transformer) to unify answer discrimination and generation via shared parameters and task-specific attention masks, incorporating unlikelihood training and dense annotation fine-tuning:  
-
-- **Unified Architecture with Attention Masks**: Uses two types of attention masks to support both tasks. Discriminative masks enable full context access for answer ranking; generative masks (novel) implement autoregressive Masked Language Modeling (autoregressive MLM) by appending [M] tokens to predict all answer tokens sequentially.  
-
-- **Unlikelihood Training**: Combines likelihood training (on correct answers) and unlikelihood training (on incorrect answers) in autoregressive MLM. Likelihood maximizes probability of correct tokens; unlikelihood minimizes probability of incorrect tokens, reducing generation of wrong/frequent answers.  
-
-- **Dense Annotation Fine-Tuning**: For generation, weighted likelihood/unlikelihood loss (scored by answer relevance); for discrimination, neuralNDCGT ranking module to optimize relevance-based ranking.  
-
-
-### 3) Main Experimental Results  
-Evaluated on VisDial v1.0 dataset:  
-
-- **Generative Setting**: Achieves state-of-the-art NDCG score (69.23). Unlikelihood training reduces incorrect token probabilities, and dense fine-tuning improves relevance.  
-
-- **Discriminative Setting**: Comparable to SOTA with NDCG scores of 75.92 (single-model) and 76.17 (ensemble), outperforming VisDial-BERT and VD-BERT after dense fine-tuning.  
-
-- **Ablation Studies**: Show multi-task learning (joint generation/discrimination), unlikelihood training, and dual fine-tuning each contribute to performance gains. Case studies demonstrate reduced dull/wrong tokens and improved relevance to correct answers.  
-
-
-### 4) Conclusion and Contribution  
-UniMM-UL unifies answer discrimination and generation via shared parameters and attention masks, leveraging negative instances through unlikelihood training and dense annotations via dual fine-tuning. It sets new state-of-the-art generative results and comparable discriminative results on VisDial. Key contributions:  
-- Unified model supporting both tasks with task-specific attention masks.  
-- Unlikelihood training in autoregressive MLM to exploit negative instances.  
-- Dual fine-tuning methods for dense annotations in both settings.  
-- Strong empirical performance验证有效性 of proposed mechanisms.
 
